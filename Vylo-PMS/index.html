@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vylo PMS — Portfolio Management, Built for Your Machine</title>
+<meta name="description" content="Vylo PMS is a local desktop portfolio management system for individuals, families, and small advisory practices — institutional-grade risk, allocation, and performance analytics that never leave your machine." />
+<link rel="icon" type="image/png" href="vylo-pms-icon.png" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Vylo PMS — Portfolio Management, Built for Your Machine" />
+<meta property="og:description" content="Institutional-grade risk, allocation, and performance analytics for individuals, families, and small advisory practices — running entirely on your own machine, not a vendor's cloud." />
+<meta property="og:image" content="UI Developed 2026-09-04/dashboard.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Vylo PMS — Portfolio Management, Built for Your Machine" />
+<meta name="twitter:description" content="Institutional-grade risk, allocation, and performance analytics for individuals, families, and small advisory practices — running entirely on your own machine, not a vendor's cloud." />
+<meta name="twitter:image" content="UI Developed 2026-09-04/dashboard.png" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Vylo PMS",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Windows",
+  "description": "Local desktop portfolio management system for individuals, families, and small advisory practices — institutional-grade risk, allocation, and performance analytics that never leave your machine.",
+  "offers": {
+    "@type": "Offer",
+    "availability": "https://schema.org/PreOrder"
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --primary: #0069e5;
+    --primary-dark: #00318e;
+    --primary-tint: hsl(224 76% 96%);
+    --teal: #02b8c7;
+    --teal-tint: hsl(187 76% 95%);
+    --orange: #fe9414;
+    --orange-dark: #d97706;
+    --orange-tint: hsl(33 100% 95%);
+    --brand-gradient: linear-gradient(100deg, var(--primary) 0%, var(--teal) 100%);
+    --foreground: hsl(222 47% 11%);
+    --muted: hsl(215 16% 47%);
+    --muted-tint: hsl(215 30% 97%);
+    --border: hsl(214 20% 90%);
+    --warning: hsl(38 92% 50%);
+    --gain: hsl(142 71% 35%);
+    --bg: #ffffff;
+    --max: 1080px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color:var(--foreground);
+    background:var(--bg);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 32px;}
+  section{padding:96px 0;}
+  @media (max-width:720px){ section{padding:64px 0;} .wrap{padding:0 22px;} }
+
+  /* ---------- Nav ---------- */
+  .nav{
+    position:sticky; top:0; z-index:20;
+    background:rgba(255,255,255,0.86);
+    backdrop-filter:saturate(180%) blur(12px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav .wrap{display:flex; align-items:center; justify-content:space-between; padding-top:16px; padding-bottom:16px;}
+  .wordmark{font-weight:800; font-size:20px; letter-spacing:-0.02em;}
+  .wordmark span{color:var(--primary);}
+  .brand-logo{display:block; height:52px; width:auto;}
+  .hero-logo{display:block; height:120px; width:auto; margin:0 auto 14px;}
+  .hero-tagline{font-size:13px; font-weight:700; letter-spacing:.14em; color:var(--muted); text-transform:uppercase; margin:0 0 24px;}
+  footer .brand-logo{height:40px;}
+  @media (max-width:720px){ .brand-logo{height:40px;} .hero-logo{height:84px; margin-bottom:12px;} }
+  .nav-links{display:flex; align-items:center; gap:28px; font-size:14px; font-weight:500; color:var(--muted);}
+  .nav-links a:hover{color:var(--foreground);}
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    padding:11px 22px; border-radius:8px; font-weight:600; font-size:14px;
+    text-decoration:none; border:1px solid transparent; cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .btn-primary{background:var(--orange); color:var(--foreground); box-shadow:0 1px 2px rgba(16,24,64,.15), 0 6px 16px -8px rgba(254,148,20,.65);}
+  .btn-primary:hover{background:var(--orange-dark); transform:translateY(-1px);}
+  .btn-ghost{background:transparent; color:var(--foreground); border-color:var(--border);}
+  .btn-ghost:hover{background:var(--muted-tint);}
+  .nav .btn{padding:9px 18px; font-size:13.5px;}
+
+  /* ---------- Hero ---------- */
+  .hero{padding-top:88px; padding-bottom:72px; text-align:center;}
+  .eyebrow{
+    display:inline-block; font-size:13px; font-weight:600; color:var(--primary);
+    background:var(--primary-tint); padding:6px 14px; border-radius:999px; letter-spacing:.01em;
+    margin-bottom:24px;
+  }
+  h1{
+    font-size:56px; line-height:1.08; letter-spacing:-0.03em; font-weight:800; margin:0 0 22px;
+    max-width:820px; margin-left:auto; margin-right:auto;
+  }
+  h1 .accent{
+    color:var(--primary);
+    background:var(--brand-gradient); -webkit-background-clip:text; background-clip:text;
+  }
+  @supports (-webkit-background-clip:text) or (background-clip:text){
+    h1 .accent{-webkit-text-fill-color:transparent;}
+  }
+  .lede{
+    font-size:19px; color:var(--muted); max-width:620px; margin:0 auto 36px; font-weight:400;
+  }
+  .hero-ctas{display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap;}
+  .hero-note{margin-top:16px; font-size:13px; color:var(--muted);}
+  @media (max-width:720px){ h1{font-size:36px;} .lede{font-size:17px;} }
+
+  /* ---------- Device frame for screenshots ---------- */
+  .frame{
+    border-radius:14px; border:1px solid var(--border); background:#fff;
+    box-shadow:0 24px 60px -20px rgba(16,24,64,.28), 0 2px 8px rgba(16,24,64,.06);
+    overflow:hidden;
+  }
+  .frame-bar{
+    display:flex; align-items:center; gap:6px;
+    padding:10px 14px; background:#f4f6fa; border-bottom:1px solid var(--border);
+  }
+  .frame-bar .dot{width:9px; height:9px; border-radius:50%; background:#dcdfe6;}
+  .frame img{display:block; width:100%; height:auto;}
+
+  /* ---------- Problem ---------- */
+  .problem{background:var(--muted-tint); text-align:center;}
+  .problem h2{font-size:32px; letter-spacing:-0.02em; max-width:680px; margin:0 auto 18px; font-weight:700;}
+  .problem p{font-size:17px; color:var(--muted); max-width:640px; margin:0 auto;}
+
+  /* ---------- Section heads ---------- */
+  .section-head{max-width:640px; margin:0 auto 56px; text-align:center;}
+  .section-head h2{font-size:34px; letter-spacing:-0.02em; font-weight:700; margin:0 0 14px;}
+  .section-head p{font-size:17px; color:var(--muted); margin:0;}
+
+  /* ---------- Pillars ---------- */
+  .pillar{
+    display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center;
+    padding:56px 0;
+  }
+  .pillar + .pillar{border-top:1px solid var(--border);}
+  .pillar.reverse .pillar-copy{order:2;}
+  .pillar.reverse .pillar-visual{order:1;}
+  .pillar-num{font-size:13px; font-weight:700; color:var(--primary); letter-spacing:.06em; margin-bottom:10px;}
+  .pillar-num.n-teal{color:#0a7c87;}
+  .pillar-num.n-orange{color:var(--orange-dark);}
+  .pillar-num.n-navy{color:var(--primary-dark);}
+  .pillar-copy h3{font-size:26px; font-weight:700; letter-spacing:-0.01em; margin:0 0 14px;}
+  .pillar-copy p{font-size:16px; color:var(--muted); margin:0;}
+  .pillar-visual .frame{transform:scale(1); }
+  .local-diagram{
+    border:1px solid var(--border); border-radius:14px; background:var(--muted-tint);
+    padding:40px 28px; text-align:center;
+  }
+  .local-node{
+    display:inline-block; background:#fff; border:1px solid var(--border); border-radius:12px;
+    padding:22px 32px; box-shadow:0 10px 24px -14px rgba(16,24,64,.2);
+  }
+  .local-node-label{font-weight:700; font-size:16px; margin-bottom:4px;}
+  .local-node-sub{font-size:13px; color:var(--muted);}
+  .local-diagram-arrow{font-size:13px; color:var(--muted); margin:18px 0; letter-spacing:.02em;}
+  .local-diagram-cloud{
+    display:inline-block; font-size:13.5px; font-weight:600; color:var(--primary-dark);
+    background:var(--primary-tint); border-radius:999px; padding:8px 18px;
+  }
+  @media (max-width:860px){
+    .pillar, .pillar.reverse{grid-template-columns:1fr;}
+    .pillar.reverse .pillar-copy, .pillar.reverse .pillar-visual{order:initial;}
+  }
+
+  /* ---------- Capabilities ---------- */
+  .cap-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:22px;}
+  .cap-card{
+    border:1px solid var(--border); border-radius:14px; padding:26px 22px;
+    background:#fff; transition:box-shadow .15s ease, transform .15s ease, border-color .15s ease;
+  }
+  .cap-card:hover{box-shadow:0 14px 32px -16px rgba(16,24,64,.22); transform:translateY(-2px); border-color:transparent;}
+  .cap-icon{
+    width:38px; height:38px; border-radius:10px; display:flex; align-items:center; justify-content:center;
+    font-size:17px; margin-bottom:16px; color:#fff; font-weight:800;
+  }
+  .cap-card.c-blue .cap-icon{background:var(--primary);}
+  .cap-card.c-teal .cap-icon{background:var(--teal);}
+  .cap-card.c-orange .cap-icon{background:var(--orange);}
+  .cap-card.c-navy .cap-icon{background:var(--primary-dark);}
+  .cap-card h4{font-size:16.5px; font-weight:700; margin:0 0 8px; letter-spacing:-0.005em; line-height:1.3;}
+  .cap-card p{font-size:14px; color:var(--muted); margin:0; line-height:1.5;}
+  @media (max-width:960px){ .cap-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .cap-grid{grid-template-columns:1fr;} }
+
+  /* ---------- Personas ---------- */
+  .personas-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
+  .persona-card{
+    border:1px solid var(--border); border-radius:14px; padding:28px 22px;
+    background:#fff; transition:box-shadow .15s ease, transform .15s ease;
+  }
+  .persona-card:hover{box-shadow:0 12px 30px -14px rgba(16,24,64,.2); transform:translateY(-2px);}
+  .persona-tag{
+    display:inline-block; font-size:11.5px; font-weight:700; color:var(--primary);
+    background:var(--primary-tint); padding:4px 10px; border-radius:999px; margin-bottom:14px; letter-spacing:.02em;
+  }
+  .persona-tag.t-teal{color:#0a7c87; background:var(--teal-tint);}
+  .persona-tag.t-orange{color:var(--orange-dark); background:var(--orange-tint);}
+  .persona-tag.t-navy{color:var(--primary-dark); background:var(--primary-tint);}
+  .coming-soon{
+    display:inline-block; font-size:10.5px; font-weight:700; color:var(--muted);
+    background:var(--muted-tint); border:1px solid var(--border); padding:3px 9px; border-radius:999px;
+    margin-left:8px; letter-spacing:.02em; vertical-align:middle;
+  }
+  .persona-card h4{font-size:18px; font-weight:700; margin:0 0 10px; letter-spacing:-0.01em;}
+  .persona-card p{font-size:14.5px; color:var(--muted); margin:0;}
+  @media (max-width:900px){ .personas-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .personas-grid{grid-template-columns:1fr;} }
+
+  /* ---------- Trust strip ---------- */
+  .trust{background:var(--foreground); color:#fff;}
+  .trust .section-head h2{color:#fff;}
+  .trust .section-head p{color:rgba(255,255,255,.65);}
+  .trust-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:28px; text-align:center;}
+  .trust-item .num{font-size:15px; font-weight:700; margin-bottom:8px; color:var(--orange);}
+  .trust-item p{font-size:14px; color:rgba(255,255,255,.6); margin:0;}
+  @media (max-width:860px){ .trust-grid{grid-template-columns:1fr 1fr;} }
+
+  /* ---------- Final CTA ---------- */
+  .cta-final{text-align:center;}
+  .cta-final h2{font-size:34px; font-weight:700; letter-spacing:-0.02em; margin:0 0 16px;}
+  .cta-final p{font-size:17px; color:var(--muted); max-width:520px; margin:0 auto 32px;}
+
+  /* ---------- Footer ---------- */
+  footer{border-top:1px solid var(--border); padding:40px 0;}
+  footer .wrap{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;}
+  footer .wordmark{font-size:16px;}
+  footer .foot-note{font-size:13px; color:var(--muted);}
+  .footer-copyright{margin-top:20px; padding-top:20px; border-top:1px solid var(--border);}
+
+  /* ---------- Accessibility ---------- */
+  a:focus-visible, button:focus-visible, .btn:focus-visible, .nav-toggle:focus-visible, .faq-q:focus-visible{
+    outline:2px solid var(--primary-dark); outline-offset:2px; border-radius:4px;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+  }
+
+  /* ---------- CSS hygiene: section backgrounds as classes, not inline style= ---------- */
+  .section-muted{background:var(--muted-tint);}
+  .trust-item{transition:transform .15s ease;}
+  .trust-item:hover{transform:translateY(-2px);}
+
+  /* ---------- Proof bullets (hero) ---------- */
+  .proof-bullets{
+    display:flex; align-items:center; justify-content:center; gap:22px; flex-wrap:wrap;
+    margin:0 0 32px; font-size:14px; color:var(--muted); font-weight:500;
+  }
+  .proof-bullets span{display:inline-flex; align-items:center; gap:7px;}
+  .proof-bullets .dot{width:5px; height:5px; border-radius:50%; background:var(--teal); display:inline-block;}
+
+  /* ---------- Hero demo screenshot ---------- */
+  .hero-demo{margin:44px auto 0; max-width:900px;}
+
+  /* ---------- Mobile nav ---------- */
+  .nav-toggle{display:none; background:none; border:1px solid var(--border); border-radius:8px; padding:8px 10px; cursor:pointer;}
+  @media (max-width:720px){
+    .nav-links{
+      position:absolute; top:100%; left:0; right:0; flex-direction:column; align-items:flex-start;
+      background:#fff; border-bottom:1px solid var(--border); padding:16px 22px; gap:16px;
+      display:none;
+    }
+    .nav-links.open{display:flex;}
+    .nav-toggle{display:inline-flex;}
+    .hero-ctas .btn{width:100%;}
+    .hero-ctas{flex-direction:column;}
+  }
+
+  /* ---------- How it works / Deployment ---------- */
+  .deploy-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:12px;}
+  .deploy-card{border:1px solid var(--border); border-radius:14px; padding:24px 22px; background:#fff;}
+  .deploy-card h4{font-size:15.5px; font-weight:700; margin:0 0 8px;}
+  .deploy-card p{font-size:14px; color:var(--muted); margin:0;}
+  @media (max-width:860px){ .deploy-grid{grid-template-columns:1fr;} }
+
+  /* ---------- Persona CTA microcopy ---------- */
+  .persona-cta{
+    display:inline-block; margin-top:16px; font-size:13px; font-weight:600; color:var(--primary);
+    text-decoration:none; border-top:1px solid var(--border); padding-top:14px; width:100%;
+  }
+  .persona-cta:hover{color:var(--primary-dark);}
+
+  /* ---------- Gallery ---------- */
+  .gallery-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  .gallery-item{cursor:zoom-in; border:none; background:none; padding:0; display:block; width:100%;}
+  .gallery-item .frame{margin:0;}
+  .gallery-caption{font-size:13px; color:var(--muted); margin-top:8px; text-align:left;}
+  @media (max-width:860px){ .gallery-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .gallery-grid{grid-template-columns:1fr;} }
+  .lightbox{
+    position:fixed; inset:0; background:rgba(10,14,28,.88); z-index:50;
+    display:none; align-items:center; justify-content:center; padding:32px; cursor:zoom-out;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox img{max-width:min(1100px,92vw); max-height:88vh; border-radius:10px; box-shadow:0 30px 80px rgba(0,0,0,.5);}
+  .lightbox-close{
+    position:absolute; top:24px; right:28px; background:rgba(255,255,255,.12); color:#fff; border:1px solid rgba(255,255,255,.3);
+    border-radius:8px; width:36px; height:36px; font-size:18px; cursor:pointer;
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq-list{max-width:760px; margin:0 auto;}
+  .faq-item{border-bottom:1px solid var(--border);}
+  .faq-q{
+    width:100%; text-align:left; background:none; border:none; cursor:pointer;
+    padding:20px 0; font-size:16px; font-weight:600; color:var(--foreground);
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+  }
+  .faq-q .chev{transition:transform .15s ease; color:var(--muted); flex-shrink:0;}
+  .faq-item.open .faq-q .chev{transform:rotate(180deg);}
+  .faq-a{max-height:0; overflow:hidden; transition:max-height .2s ease;}
+  .faq-item.open .faq-a{max-height:220px;}
+  .faq-a p{font-size:14.5px; color:var(--muted); margin:0 0 20px; padding-right:40px;}
+</style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="wrap">
+      <img class="brand-logo" src="../vylo-logo.png" alt="Vylo PMS" width="160" height="52" />
+      <nav class="nav-links" id="navLinks">
+        <a href="#pillars">What it does</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#capabilities">What it fixes</a>
+        <a href="#personas">Who it's for</a>
+        <a href="#trust">Security</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">☰</button>
+        <a class="btn btn-primary" href="mailto:vyloproduct@gmail.com?subject=Vylo%20PMS%20early%20access">Request early access</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="wrap">
+      <img class="hero-logo" src="vylo-pms-icon.png" alt="Vylo PMS" width="120" height="120" />
+      <p class="hero-tagline">Private. Precise. Powerful.</p>
+      <h1>Institutional-grade portfolio management — <span class="accent">precise, powerful, entirely yours.</span></h1>
+      <p class="lede">View your investments — stocks, funds, real estate, gold — and their performance, right on your own computer, never on an external cloud.</p>
+      <div class="proof-bullets">
+        <span><span class="dot"></span>Every core figure checked line-by-line against a real 17-holding portfolio</span>
+        <span><span class="dot"></span>Real estate, gold, and market instruments in one view</span>
+        <span><span class="dot"></span>Your data stays on your own machine, always</span>
+      </div>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="mailto:vyloproduct@gmail.com?subject=Vylo%20PMS%20early%20access">Request early access</a>
+        <a class="btn btn-ghost" href="#capabilities">See what it fixes</a>
+      </div>
+      <div class="hero-demo">
+        <div class="frame">
+          <div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <img src="UI Developed 2026-09-04/dashboard.png" alt="Vylo PMS Dashboard showing portfolio value, unrealized P&amp;L, XIRR, and allocation breakdown" width="1920" height="1080" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROBLEM ================= -->
+  <section class="problem">
+    <div class="wrap">
+      <h2>Somewhere between a spreadsheet and an enterprise platform, most portfolios fall through.</h2>
+      <p>Spreadsheets don't know your risk capacity. Brokerage apps show you a number, not a plan. Enterprise platforms are priced — and built — for a firm managing billions, not a household, a solo advisor, or a five-person practice. Vylo PMS was built to sit exactly in that gap.</p>
+    </div>
+  </section>
+
+  <!-- ================= PILLARS ================= -->
+  <section id="pillars">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>What it actually does</h2>
+        <p>Four things most portfolio tools make you choose between — Vylo PMS doesn't ask you to.</p>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-copy">
+          <div class="pillar-num">01 — PRIVACY</div>
+          <h3>Local-first, by construction</h3>
+          <p>Every holding, transaction, and goal lives in a database on your own machine. There's no cloud account holding your portfolio, no vendor with a copy of your net worth — your data is stored locally rather than in a vendor-hosted cloud account.</p>
+        </div>
+        <div class="pillar-visual">
+          <div class="local-diagram">
+            <div class="local-diagram-row">
+              <div class="local-node"><div class="local-node-label">Your desktop</div><div class="local-node-sub">App + database, one machine</div></div>
+            </div>
+            <div class="local-diagram-arrow">↓ everything stays here ↓</div>
+            <div class="local-diagram-cloud">✕ &nbsp;No cloud copy of your portfolio, ever</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pillar reverse">
+        <div class="pillar-copy">
+          <div class="pillar-num n-teal">02 — ACCURACY</div>
+          <h3>Real formulas, independently checked</h3>
+          <p>Modified Dietz time-weighted return, XIRR, CAGR projections, HHI concentration — the same math an analyst would run by hand. Every core figure was validated line-by-line against a real 17-holding portfolio until it matched exactly, not just "looked about right."</p>
+        </div>
+        <div class="pillar-visual">
+          <div class="frame">
+            <div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+            <img src="UI Developed 2026-09-04/holdings.png" alt="Vylo PMS Holdings page showing multi-currency valuation and price staleness tracking" width="1920" height="1080" loading="lazy" />
+          </div>
+        </div>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-copy">
+          <div class="pillar-num n-orange">03 — INTELLIGENCE</div>
+          <h3>Risk-aware, not just reactive</h3>
+          <p>Every allocation recommendation reconciles three numbers most tools never even ask for: what your goals require, what your risk capacity allows, and what you're actually willing to stomach — then shows you the gap between them, not just a target percentage.</p>
+        </div>
+        <div class="pillar-visual">
+          <div class="frame">
+            <div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+            <img src="UI Developed 2026-09-04/planning-gap-analysis.png" alt="Vylo PMS Planning page showing current vs. target allocation and the gap between them" width="1920" height="1080" loading="lazy" />
+          </div>
+        </div>
+      </div>
+
+      <div class="pillar reverse">
+        <div class="pillar-copy">
+          <div class="pillar-num n-navy">04 — TEAM-READY</div>
+          <h3>Built for more than one person</h3>
+          <p>Give a spouse read access, a consultant a scoped client view, or a small firm's whole team a shared, audited workspace. Every account sees only what it's allowed to — enforced at the API on every request, not just hidden in the interface.</p>
+        </div>
+        <div class="pillar-visual">
+          <div class="frame">
+            <div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+            <img src="UI Developed 2026-09-04/admin-users.png" alt="Vylo PMS Admin page showing user roles and client-advisor mapping" width="1920" height="1080" loading="lazy" />
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= HOW IT WORKS / DEPLOYMENT ================= -->
+  <section id="how-it-works" class="section-muted">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>How it actually runs</h2>
+        <p>No account to create, no server to manage, no monthly bill.</p>
+      </div>
+      <div class="deploy-grid">
+        <div class="deploy-card">
+          <h4>Install once, run locally</h4>
+          <p>A desktop app for Windows. Everything — the app, the database, your data — lives on that one machine. No sign-up, no cloud account.</p>
+        </div>
+        <div class="deploy-card">
+          <h4>Bring your own data</h4>
+          <p>Start from scratch, or import transaction history from a spreadsheet or broker statement. Real estate and gold get their own installment schedules — no manual re-entry.</p>
+        </div>
+        <div class="deploy-card">
+          <h4>Share it, on your terms</h4>
+          <p>Add a Family Member, Financial Advisor, or Small-Firm login when you want more than one person working from the same data — each sees only what their role allows.</p>
+        </div>
+        <div class="deploy-card">
+          <h4>Your own backups</h4>
+          <p>Trigger a full backup any time, restore from one with a typed confirmation before anything is overwritten. The files stay on your machine — back them up wherever you'd back up anything else important.</p>
+        </div>
+        <div class="deploy-card">
+          <h4>Price data, on request</h4>
+          <p>Optional market-data lookups (for prices you don't enter by hand) are the only network calls the app makes — no telemetry, no analytics, no license check, ever.</p>
+        </div>
+        <div class="deploy-card">
+          <h4>Works without the internet</h4>
+          <p>Everything except optional live-price refresh works fully offline — your holdings, history, and analysis don't depend on a connection.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CAPABILITIES ================= -->
+  <section id="capabilities" class="section-muted">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>The failure modes other portfolio tools shrug at</h2>
+        <p>Each of these started as a real problem in a real portfolio — not a feature-list item invented for a demo.</p>
+      </div>
+      <div class="cap-grid">
+        <div class="cap-card c-navy">
+          <div class="cap-icon">RE</div>
+          <h4>Real estate and gold, tracked like real assets</h4>
+          <p>A 20-year home loan doesn't inflate your holdings the day you sign the paperwork. Direct Real Estate and Physical Gold get their own installment schedules — quantity pinned at one, EMI or savings plans generated automatically, outstanding loan balance tracked alongside.</p>
+        </div>
+        <div class="cap-card c-blue">
+          <div class="cap-icon">SC</div>
+          <h4>Nothing counts until it's actually paid</h4>
+          <p>Generate a 20-year installment schedule and your Dashboard won't pretend all 240 payments already happened. Every installment sits as Scheduled until its date arrives and you confirm it — one at a time, or all overdue rows at once.</p>
+        </div>
+        <div class="cap-card c-teal">
+          <div class="cap-icon">RA</div>
+          <h4>Risk fields that match what you actually hold</h4>
+          <p>A Fixed Deposit doesn't need a Beta or a Leverage field, so it doesn't get one. Every risk field shows or hides itself based on the instrument's real vehicle type — and the backend enforces it, not just the screen.</p>
+        </div>
+        <div class="cap-card c-orange">
+          <div class="cap-icon">PL</div>
+          <h4>A planning workflow that reconciles itself</h4>
+          <p>Goals, risk appetite, requirements, targets, gap analysis, rebalance, investment plan — seven steps that read the three numbers most tools never ask for and show you the actual gap between them, not just a target percentage.</p>
+        </div>
+        <div class="cap-card c-blue">
+          <div class="cap-icon">IM</div>
+          <h4>Bulk import without importing someone else's mistake</h4>
+          <p>Every imported row is checked against its portfolio's market and currency before it commits. One bad row gets flagged and skipped — the other two hundred still go through.</p>
+        </div>
+        <div class="cap-card c-teal">
+          <div class="cap-icon">SS</div>
+          <h4>A score weighted for what's actually applicable</h4>
+          <p>Seven scoring dimensions, but not every one applies to every asset class — a Fixed Deposit's score isn't dragged down by a Beta it was never supposed to have. Missing data and inapplicable data are shown as two different things, not blurred into one bad number.</p>
+        </div>
+        <div class="cap-card c-navy">
+          <div class="cap-icon">RP</div>
+          <h4>Reports which generate the data you actually need</h4>
+          <p>A PDF statement report that looks like something you'd actually send to a co-owner, a lender, or your own records — not a printed screenshot of a browser tab.</p>
+        </div>
+        <div class="cap-card c-orange">
+          <div class="cap-icon">AD</div>
+          <h4>An admin panel built for total control</h4>
+          <p>Role-based access enforced at the API, not just the UI. A full audit log. Backup and restore with a mandatory safety snapshot before anything is overwritten, and a typed confirmation so a restore is never one misclick away.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= GALLERY ================= -->
+  <section id="gallery">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>A closer look</h2>
+        <p>Six real screens from the app itself — click any one to see it full-size.</p>
+      </div>
+      <div class="gallery-grid">
+        <button class="gallery-item" data-full="UI Developed 2026-09-04/dashboard.png" data-caption="Dashboard — portfolio value, unrealized P&amp;L, XIRR, and allocation at a glance.">
+          <div class="frame"><div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <img src="UI Developed 2026-09-04/dashboard.png" alt="Dashboard" width="1920" height="1080" loading="lazy" /></div>
+          <div class="gallery-caption">Dashboard — value, P&amp;L, and XIRR at a glance.</div>
+        </button>
+        <button class="gallery-item" data-full="UI Developed 2026-09-04/planning-targets.png" data-caption="Planning — set target allocations against a risk-capacity ceiling the app checks for you.">
+          <div class="frame"><div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <img src="UI Developed 2026-09-04/planning-targets.png" alt="Planning targets" width="1920" height="1080" loading="lazy" /></div>
+          <div class="gallery-caption">Planning — targets checked against your risk ceiling.</div>
+        </button>
+        <button class="gallery-item" data-full="UI Developed 2026-09-04/portfolio-insights-risk-analysis.png" data-caption="Portfolio Insights — composite risk score against your target, with the underlying risk dimensions.">
+          <div class="frame"><div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <img src="UI Developed 2026-09-04/portfolio-insights-risk-analysis.png" alt="Portfolio Insights risk analysis" width="1920" height="1080" loading="lazy" /></div>
+          <div class="gallery-caption">Portfolio Insights — composite risk score vs. target.</div>
+        </button>
+        <button class="gallery-item" data-full="UI Developed 2026-09-04/investment-payment-schedule.png" data-caption="Investment Payment Schedule — recurring SIPs and EMIs generated as a schedule, confirmed one at a time.">
+          <div class="frame"><div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <img src="UI Developed 2026-09-04/investment-payment-schedule.png" alt="Investment Payment Schedule" width="1920" height="1080" loading="lazy" /></div>
+          <div class="gallery-caption">Recurring SIPs and EMIs, confirmed one at a time.</div>
+        </button>
+        <button class="gallery-item" data-full="UI Developed 2026-09-04/reports.png" data-caption="Reports — a custom filter builder plus one-click statements.">
+          <div class="frame"><div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <img src="UI Developed 2026-09-04/reports.png" alt="Reports" width="1920" height="1080" loading="lazy" /></div>
+          <div class="gallery-caption">Reports — custom filters plus one-click statements.</div>
+        </button>
+        <button class="gallery-item" data-full="UI Developed 2026-09-04/admin-users.png" data-caption="Admin — user roles and client-advisor mapping, enforced at the API.">
+          <div class="frame"><div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <img src="UI Developed 2026-09-04/admin-users.png" alt="Admin users" width="1920" height="1080" loading="lazy" /></div>
+          <div class="gallery-caption">Admin — roles and client mapping, enforced at the API.</div>
+        </button>
+      </div>
+    </div>
+  </section>
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Screenshot preview">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">✕</button>
+    <img id="lightboxImg" src="" alt="" />
+  </div>
+
+  <!-- ================= PERSONAS ================= -->
+  <section id="personas" class="section-muted">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Built for how you actually work</h2>
+        <p>One app, four ways to use it — matched to how real portfolios actually get managed.</p>
+      </div>
+      <div class="personas-grid">
+        <div class="persona-card">
+          <span class="persona-tag">OWNER · PRIMARY USER</span>
+          <h4>Managing your own money, seriously</h4>
+          <p>Full control, every module, one login. Replace the spreadsheet that was never really keeping up with what your money is actually doing.</p>
+        </div>
+        <div class="persona-card">
+          <span class="persona-tag t-teal">FAMILY MEMBER</span>
+          <h4>Visibility, without owning the spreadsheet</h4>
+          <p>A plain-language view of where things stand — risk level, performance, goals — without needing to be the one who manages it day to day.</p>
+        </div>
+        <div class="persona-card">
+          <span class="persona-tag t-orange">FINANCIAL ADVISOR</span>
+          <h4>One workspace, every client, walled off</h4>
+          <p>A client-advisor mapping with real tenant isolation. One client's numbers can never leak into another's view — not a UI filter, an actual data boundary.</p>
+        </div>
+        <div class="persona-card">
+          <span class="persona-tag t-navy">SMALL FIRM</span><span class="coming-soon">Coming soon</span>
+          <h4>Enterprise controls, without the enterprise price</h4>
+          <p>Role-based access, an audit log, backup &amp; restore with a mandatory safety snapshot — running on hardware your firm already owns.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TRUST ================= -->
+  <section id="trust" class="trust">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Built to be trusted with the numbers, not just to show them</h2>
+        <p>The controls a portfolio tool should have had from day one.</p>
+      </div>
+      <div class="trust-grid">
+        <div class="trust-item">
+          <div class="num">Tenant isolation</div>
+          <p>Every portfolio-scoped request is checked against a strict per-account reach rule — no shared visibility by default, ever.</p>
+        </div>
+        <div class="trust-item">
+          <div class="num">Full audit log</div>
+          <p>Every sensitive action — user changes, role reassignment, restores — is recorded and filterable by the Owner.</p>
+        </div>
+        <div class="trust-item">
+          <div class="num">Safety-net restore</div>
+          <p>Every restore takes a mandatory pre-restore snapshot first, with a typed confirmation before anything is overwritten.</p>
+        </div>
+        <div class="trust-item">
+          <div class="num">Role-based access</div>
+          <p>Owner, Family Member, Financial Advisor, and Small-Firm roles — each with exactly the access that role should have, no more.</p>
+        </div>
+        <div class="trust-item">
+          <div class="num">Offline account recovery</div>
+          <p>Forgot your password? Recovery works with one-time codes generated on your own machine — no email, no reset link, no password-reset event ever leaves your computer.</p>
+        </div>
+        <div class="trust-item">
+          <div class="num">Bcrypt password hashing</div>
+          <p>Passwords and recovery codes are hashed with bcrypt before storage — never kept in plaintext, anywhere.</p>
+        </div>
+        <div class="trust-item">
+          <div class="num">No telemetry, ever</div>
+          <p>No analytics, no crash reporting, no license check calling home. The only outbound traffic is the market-price lookups you configure yourself — and any AI features run against a model on your own machine, not a cloud service.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section id="faq" class="section-muted">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Questions people actually ask</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Is there a cloud version?<span class="chev">▾</span></button>
+          <div class="faq-a"><p>No — Vylo PMS is a local desktop app by design. There's no hosted account, no vendor server holding your portfolio, and no plan to add one. If you want a second person working from the same data, add them as a login on the same installation instead (see "Team-ready" above).</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">What operating systems does it support?<span class="chev">▾</span></button>
+          <div class="faq-a"><p>Windows today. The app is built on Tauri, which supports macOS and Linux as well — those builds aren't published yet, but nothing in the architecture rules them out.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Can more than one person use it?<span class="chev">▾</span></button>
+          <div class="faq-a"><p>Yes — the Owner can add a Family Member or Financial Advisor login, each seeing only the portfolios they're entitled to, enforced at the API on every request, not just hidden in the interface. Small-Firm multi-seat access is coming soon.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Can I bring in my existing transaction history?<span class="chev">▾</span></button>
+          <div class="faq-a"><p>Yes — import a spreadsheet or broker statement, or generate an installment schedule for a recurring SIP, EMI, or gold purchase plan instead of entering each one by hand.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">What does early access actually mean right now?<span class="chev">▾</span></button>
+          <div class="faq-a"><p>Reaching out gets you a personal walkthrough using your own portfolio data, plus early word on pricing and availability as we roll out to new users.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FINAL CTA ================= -->
+  <section class="cta-final">
+    <div class="wrap">
+      <h2>See it against your own numbers</h2>
+      <p>The best way to evaluate a portfolio tool is with a real portfolio. Get in touch and we'll set up a walkthrough with your own data.</p>
+      <a class="btn btn-primary" href="mailto:vyloproduct@gmail.com?subject=Vylo%20PMS%20early%20access">Request early access</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <img class="brand-logo" src="../vylo-logo.png" alt="Vylo PMS" width="160" height="40" />
+      <div class="foot-note">Built for people who take their own portfolio as seriously as any institution does.</div>
+    </div>
+    <div class="wrap footer-copyright">
+      <div class="foot-note">© 2026 Vylo PMS. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- Analytics: Cloudflare Web Analytics (free, no cookies) -- add the site token once the
+       GitHub Pages deploy is live (Decision D). Left commented out rather than shipping a
+       placeholder token that would silently fail.
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "REPLACE_WITH_REAL_TOKEN"}'></script>
+  -->
+  <script>
+    // Mobile nav toggle
+    var navToggle = document.getElementById('navToggle');
+    var navLinks = document.getElementById('navLinks');
+    if (navToggle) {
+      navToggle.addEventListener('click', function () {
+        var isOpen = navLinks.classList.toggle('open');
+        navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+      navLinks.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          navLinks.classList.remove('open');
+          navToggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+
+    // Gallery lightbox
+    var lightbox = document.getElementById('lightbox');
+    var lightboxImg = document.getElementById('lightboxImg');
+    var lightboxClose = document.getElementById('lightboxClose');
+    document.querySelectorAll('.gallery-item').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        lightboxImg.src = btn.getAttribute('data-full');
+        lightboxImg.alt = btn.getAttribute('data-caption') || '';
+        lightbox.classList.add('open');
+      });
+    });
+    function closeLightbox() { lightbox.classList.remove('open'); lightboxImg.src = ''; }
+    if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+    if (lightbox) lightbox.addEventListener('click', function (e) { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLightbox(); });
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-q').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var item = btn.closest('.faq-item');
+        var isOpen = item.classList.toggle('open');
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+    });
+  </script>
+</body>
+</html>

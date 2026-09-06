@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vylo — Vision. Yield. Logic. On.</title>
+<meta name="description" content="Vylo builds focused, privacy-conscious AI products designed to improve clarity, control and decision-making. This repository is the official release and distribution hub for Vylo products." />
+<link rel="icon" type="image/png" href="vylo-logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --primary: #0069e5;
+    --primary-dark: #00318e;
+    --primary-tint: hsl(224 76% 96%);
+    --teal: #02b8c7;
+    --orange: #fe9414;
+    --foreground: hsl(222 47% 11%);
+    --muted: hsl(215 16% 47%);
+    --muted-tint: hsl(215 30% 97%);
+    --border: hsl(214 20% 90%);
+    --bg: #ffffff;
+    --max: 880px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color:var(--foreground);
+    background:var(--bg);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+  section{padding:56px 0;}
+  section + section{border-top:1px solid var(--border);}
+
+  header{padding:28px 0; border-bottom:1px solid var(--border);}
+  .brand-logo{display:block; height:44px; width:auto;}
+
+  .hero{padding:72px 0 56px; text-align:center; border-top:none;}
+  .hero-tagline{
+    font-size:13px; font-weight:700; letter-spacing:.14em; color:var(--muted);
+    text-transform:uppercase; margin:0 0 20px;
+  }
+  h1{font-size:36px; letter-spacing:-0.02em; font-weight:800; margin:0 0 18px; max-width:720px; margin-left:auto; margin-right:auto;}
+  .lede{font-size:17px; color:var(--muted); max-width:600px; margin:0 auto; font-weight:400;}
+
+  h2{font-size:24px; font-weight:700; letter-spacing:-0.01em; margin:0 0 18px;}
+
+  .product-card{
+    display:flex; align-items:center; gap:24px;
+    border:1px solid var(--border); border-radius:14px; padding:28px;
+    text-decoration:none; color:inherit;
+    transition:box-shadow .15s ease, border-color .15s ease, transform .15s ease;
+  }
+  .product-card:hover{box-shadow:0 14px 32px -16px rgba(16,24,64,.22); transform:translateY(-2px); border-color:transparent;}
+  .product-icon{height:56px; width:56px; border-radius:12px; flex-shrink:0;}
+  .product-copy .product-tag{
+    display:inline-block; font-size:11.5px; font-weight:700; color:var(--primary);
+    background:var(--primary-tint); padding:3px 9px; border-radius:999px; margin-bottom:8px; letter-spacing:.06em; text-transform:uppercase;
+  }
+  .product-copy h3{font-size:19px; font-weight:700; margin:0 0 6px;}
+  .product-copy p{font-size:14.5px; color:var(--muted); margin:0 0 8px;}
+  .product-link{font-size:13.5px; font-weight:600; color:var(--primary);}
+
+  .more-note{
+    font-size:14px; color:var(--muted); margin-top:20px;
+  }
+
+  .releases p{font-size:15px; color:var(--muted); margin:0 0 16px;}
+  .releases ul{margin:0 0 16px; padding-left:20px;}
+  .releases li{font-size:15px; color:var(--muted); margin-bottom:6px;}
+  .notice{
+    background:var(--muted-tint); border:1px solid var(--border); border-radius:10px;
+    padding:16px 18px; font-size:14px; color:var(--foreground); margin:0 0 16px;
+  }
+  .notice a{color:var(--primary); font-weight:600;}
+
+  .about p{font-size:15px; color:var(--muted); margin:0 0 16px;}
+
+  footer{padding:32px 0; text-align:center; border-top:1px solid var(--border);}
+  footer .foot-note{font-size:13px; color:var(--muted); margin:0 0 6px;}
+
+  @media (max-width:560px){
+    h1{font-size:28px;}
+    .product-card{flex-direction:column; text-align:center;}
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <div class="wrap">
+      <img class="brand-logo" src="vylo-logo.png" alt="Vylo" width="160" height="44" />
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <p class="hero-tagline">Vision. Yield. Logic. On.</p>
+      <h1>Vylo builds focused, privacy-conscious AI products designed to improve clarity, control, and decision-making.</h1>
+      <p class="lede">This repository is the official release and distribution hub for Vylo products.</p>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="wrap">
+      <h2>Products</h2>
+      <a class="product-card" href="./Vylo-PMS/">
+        <img class="product-icon" src="Vylo-PMS/vylo-pms-icon.png" alt="Vylo PMS" />
+        <div class="product-copy">
+          <span class="product-tag">Private. Precise. Powerful.</span>
+          <h3>Vylo PMS</h3>
+          <p>A local-first portfolio management system for individuals, families, and small advisory practices — stocks, funds, real estate, and gold, all in one place, never in a vendor's cloud.</p>
+          <span class="product-link">View Vylo PMS →</span>
+        </div>
+      </a>
+      <p class="more-note">More Vylo products will appear here as they launch.</p>
+    </div>
+  </section>
+
+  <section class="releases">
+    <div class="wrap">
+      <h2>Releases</h2>
+      <p>Official production-ready and preview builds of Vylo products are published through GitHub Releases.</p>
+      <p>Each release may include:</p>
+      <ul>
+        <li>Application installers</li>
+        <li>Release notes</li>
+        <li>AI disclosure</li>
+        <li>Privacy policy</li>
+        <li>Terms of use</li>
+      </ul>
+      <div class="notice">
+        Download only from the official Vylo <strong>vylo-releases</strong> repository and its published Releases section.
+      </div>
+      <p>Individual products may use different architectures and data-handling models. Refer to the relevant product's documentation and release notes for specific privacy, security, and data-storage information.</p>
+    </div>
+  </section>
+
+  <section class="support">
+    <div class="wrap">
+      <h2>Support &amp; Documentation</h2>
+      <p>Product documentation, release information, and support resources will be made available alongside each Vylo product release.</p>
+      <p class="foot-note" style="margin-top:-4px;">Questions or feedback: vyloproduct@gmail.com</p>
+    </div>
+  </section>
+
+  <section class="about">
+    <div class="wrap">
+      <h2>About Vylo</h2>
+      <p><strong>Vylo — Vision. Yield. Logic. On.</strong></p>
+      <p>Vylo is an AI product company focused on turning complex information, workflows, and decisions into clear, practical, and useful digital experiences.</p>
+      <p>We develop intelligent products that combine AI with thoughtful product design, privacy-conscious engineering, and human control. Our objective is not to add AI for its own sake, but to apply it where it can meaningfully improve understanding, organization, productivity, and decision-making.</p>
+      <p>Vylo products are designed around four principles: clarity, usefulness, trust, and control. AI should assist people without obscuring how important decisions are made or removing appropriate human oversight.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <p class="foot-note">© 2026 Vylo. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
